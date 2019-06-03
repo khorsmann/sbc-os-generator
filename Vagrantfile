@@ -17,30 +17,32 @@ Vagrant.configure("2") do |config|
     subconfig.vm.box = "debian/stretch64"
     subconfig.vm.hostname = "sbcbuilder"
     subconfig.vm.synced_folder ".", "/vagrant", type: 'virtualbox',
-    owner: "vagrant",
-    group: "vagrant",
-    mount_options: ["dmode=755,fmode=644"]
+      owner: "vagrant",
+      group: "vagrant",
+      mount_options: ["dmode=755,fmode=644"]
     subconfig.vm.provider "virtualbox" do |vb|
       vb.gui = true
       vb.memory = "2048"
       vb.cpus = 4
     end
+    subconfig.vm.provision "shell", path: "install-sbc-os.sh"
     
   end
 
-  config.vm.define "builder-ubuntu", autostart: false do |subconfig|
-    subconfig.vm.box = "ubuntu/bionic64"
-    subconfig.vm.hostname = "sbcbuilder"
-    subconfig.vm.synced_folder ".", "/vagrant", type: 'virtualbox',
-    owner: "vagrant",
-    group: "vagrant",
-    mount_options: ["dmode=755,fmode=644"]
-    subconfig.vm.provider "virtualbox" do |vb|
-      vb.gui = true
-      vb.memory = "2048"
-    end
-    
-  end
+  # ubuntu - not used
+  #config.vm.define "builder-ubuntu", autostart: false do |subconfig|
+  #  subconfig.vm.box = "ubuntu/bionic64"
+  #  subconfig.vm.hostname = "sbcbuilder"
+  #  subconfig.vm.synced_folder ".", "/vagrant", type: 'virtualbox',
+  #  owner: "vagrant",
+  #  group: "vagrant",
+  #  mount_options: ["dmode=755,fmode=644"]
+  #  subconfig.vm.provider "virtualbox" do |vb|
+  #    vb.gui = true
+  #    vb.memory = "2048"
+  #  end
+  #  
+  #end
 
 # apt-get update
 # apt-key adv --recv-keys --keyserver keyserver.ubuntu.com 40976EAF437D05B5
