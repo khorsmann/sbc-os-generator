@@ -1,7 +1,7 @@
 
 # sbc-os-generator
 
-This is are my vagrant files to build sbc-os clean and reproducible.
+This are my vagrant files to build sbc-os clean and reproducible.
 
 ## Vagrant setup
 
